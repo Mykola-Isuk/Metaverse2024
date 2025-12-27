@@ -600,18 +600,18 @@ function createShopItem(item) {
         <h3>${item.name} <span class="item-category">(${item.category})</span></h3>
         <p>${item.description}</p>
         <p class="price">$${item.price}</p>
-        <button class="buy-btn">Купити</button>
+        <button class="buy-btn" data-price="${item.price}" data-name="${item.name}">Купити</button>
     `;
     return shopItem;
 }
 
 document.getElementById('shopGrid').addEventListener('click', (e) => {
     if (e.target.classList.contains('buy-btn')) {
-        currentItemName = e.target.parentElement.querySelector('h3').textContent;
-        currentItemPrice = parseFloat(e.target.parentElement.querySelector('.price').textContent.replace('$', ''));
+        // Новий, надійний код:
+        currentItemName = e.target.dataset.name; 
+        currentItemPrice = parseFloat(e.target.dataset.price);
 
         confirmMessage.textContent = `Ви підтверджуєте додавання "${currentItemName}" до кошика?`;
-
         confirmModal.style.display = 'flex';
     }
 });
