@@ -1,14 +1,36 @@
+/* --- Refactor: Issue #6 (Standardize Colors with CSS Variables) --- */
+
 html {
     scroll-behavior: smooth;
 }
 
 :root {
+    /* Основні кольори */
     --primary: #00ff88;
     --secondary: #00ccff;
     --accent: #ff00ff;
     --dark: #0a0a0a;
     --light: #ffffff;
     --glass: rgba(255, 255, 255, 0.1);
+
+    /* НОВІ змінні (винесені з коду) */
+    --gold: #ffcc00;           /* Для заголовків університету */
+    --btn-blue: #007bff;       /* Кнопки кошика */
+    --danger: #e74c3c;         /* Кнопка видалення/ні */
+    --danger-hover: #c0392b;   
+    --success: #28a745;        /* Кнопка так */
+    --success-hover: #218838;
+    
+    /* Кольори для списків та висновків */
+    --bg-darker: #1a1a1a;
+    --bg-card: #2a2a2a;
+    --bg-item-red: #753030;    /* Фон елемента замовлення */
+    --hover-blue: #2b77d0;     /* Ховер елемента замовлення */
+    --text-highlight: #ffb142; /* Помаранчевий текст */
+    --text-blue: #4a90e2;      /* Блакитні заголовки */
+    
+    /* Градієнти та фони */
+    --bg-input: rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -26,7 +48,7 @@ body {
 }
 
 a {
-    color: #00ccff;
+    color: var(--secondary); /* Замінено #00ccff */
 }
 
 .img-container {
@@ -55,7 +77,7 @@ img {
     max-width: 100px;
     width: 15vw;
     height: auto;
-    color: #fff;
+    color: var(--light);
 }
 
 .university-background {
@@ -65,7 +87,7 @@ img {
     border-radius: 20px;
     backdrop-filter: blur(8px);
     padding: 40px;
-    color: white;
+    color: var(--light);
     text-align: right;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
     margin: 30px 0;
@@ -89,14 +111,14 @@ img {
 }
 
 .university-background h2 {
-    color: #ffcc00;
+    color: var(--gold); /* Замінено #ffcc00 */
     font-size: 2.5em;
     margin-bottom: 15px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .university-background p {
-    color: #ffffff;
+    color: var(--light);
     font-size: 1.2em;
     margin: 8px 0;
     line-height: 1.6;
@@ -104,14 +126,14 @@ img {
 }
 
 .university-background a {
-    color: #ffcc00;
+    color: var(--gold); /* Замінено #ffcc00 */
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .university-background a:hover {
-    color: #ffffff;
+    color: var(--light);
     text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
 }
 
@@ -239,7 +261,7 @@ img {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #007bff;
+    background-color: var(--btn-blue); /* Замінено #007bff */
     color: white;
     border: none;
     border-radius: 5px;
@@ -255,7 +277,7 @@ img {
     position: fixed;
     bottom: 20px;
     right: 150px;
-    background-color: #007bff;
+    background-color: var(--btn-blue); /* Замінено #007bff */
     color: white;
     border: none;
     border-radius: 5px;
@@ -267,9 +289,9 @@ img {
     z-index: 100;
 }
 
-/* тилі для кнопок скасування */
+/* Стилі для кнопок скасування */
 .remove-btn {
-    background-color: #e74c3c;
+    background-color: var(--danger); /* Замінено #e74c3c */
     color: white;
     border: none;
     border-radius: 5px;
@@ -280,7 +302,7 @@ img {
 }
 
 .remove-btn:hover {
-    background-color: #c0392b;
+    background-color: var(--danger-hover); /* Замінено #c0392b */
 }
 
 .hero {
@@ -619,7 +641,7 @@ button {
 .form-input {
     width: 100%;
     padding: 1rem;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--bg-input);
     border: 1px solid var(--primary);
     border-radius: 10px;
     color: var(--light);
@@ -1065,21 +1087,21 @@ button {
 }
 
 #confirmYes {
-    background-color: #28a745;
+    background-color: var(--success); /* Замінено #28a745 */
     color: white;
 }
 
 #confirmYes:hover {
-    background-color: #218838;
+    background-color: var(--success-hover);
 }
 
 #confirmNo {
-    background-color: #dc3545;
+    background-color: var(--danger); /* Замінено #dc3545 */
     color: white;
 }
 
 #confirmNo:hover {
-    background-color: #c82333;
+    background-color: var(--danger-hover);
 }
 
 .close {
@@ -1096,7 +1118,7 @@ button {
 #confirmMessage {
     font-size: 1.4em;
     margin-bottom: 30px;
-    color: dodgerblue;
+    color: var(--text-blue); /* Замінено dodgerblue на схожий */
 }
 
 .close:hover,
@@ -1266,7 +1288,7 @@ button {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid var(--primary);
-    background: rgba(0,0,0,0.3);
+    background: var(--bg-input);
     color: var(--light);
 }
 
@@ -1359,7 +1381,7 @@ button {
     padding: 0.7rem;
     border-radius: 10px;
     border: 1px solid var(--primary);
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--bg-input);
     color: var(--light);
     font-size: 1rem;
     transition: box-shadow 0.3s ease;
@@ -1401,7 +1423,7 @@ button {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: var(--light);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s;
 }
@@ -1416,49 +1438,50 @@ button {
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #753030;
+    background-color: var(--bg-item-red); /* Замінено #753030 */
     transition: background-color 0.3s, transform 0.2s;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .orders-list li:hover {
-    background-color: #2b77d0;
+    background-color: var(--hover-blue); /* Замінено #2b77d0 */
     transform: scale(1.02);
 }
 
 .orders-list li span {
     font-weight: bold;
-    color: #ffb142;
+    color: var(--text-highlight); /* Замінено #ffb142 */
 }
 
 .conclusion-section {
     padding: 50px 20px;
-    background: linear-gradient(180deg, #1a1a1a 0%, #2a2a2a 100%);
+    /* Замінено лінійний градієнт з hex-кодами на змінні */
+    background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-card) 100%);
     margin-top: 50px;
 }
 
 .conclusion-container {
     max-width: 1200px;
     margin: 0 auto;
-    color: #fff;
+    color: var(--light);
 }
 
 .conclusion-title {
     text-align: center;
     font-size: 2.5em;
     margin-bottom: 30px;
-    color: #4a90e2;
+    color: var(--text-blue); /* Замінено #4a90e2 */
 }
 
 .conclusion-block {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--glass);
     padding: 30px;
     border-radius: 15px;
     margin-bottom: 30px;
 }
 
 .conclusion-subtitle {
-    color: #4a90e2;
+    color: var(--text-blue); /* Замінено #4a90e2 */
     margin-bottom: 20px;
 }
 
@@ -1475,20 +1498,20 @@ button {
 .conclusion-list.results li::before {
     content: "✓";
     margin-right: 10px;
-    color: #4a90e2;
+    color: var(--text-blue); /* Замінено #4a90e2 */
 }
 
 .conclusion-list.prospects li::before {
     content: "➤";
     margin-right: 10px;
-    color: #4a90e2;
+    color: var(--text-blue); /* Замінено #4a90e2 */
 }
 
 .conclusion-summary {
     text-align: center;
     margin-top: 30px;
     padding: 20px;
-    background: rgba(74, 144, 226, 0.1);
+    background: rgba(74, 144, 226, 0.1); /* Тут можна залишити, або замінити на var(--text-blue) з opacity */
     border-radius: 15px;
 }
 
