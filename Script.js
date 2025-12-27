@@ -35,22 +35,35 @@ let cart = [];
 const cartModal = document.getElementById('cartModal');
 const cartItemsContainer = document.querySelector('.cart-items');
 
+function calculateCartTotal(cartItems) {
+    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+}
+
+function createCartItemElement(item, index) {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'cart-item';
+    itemDiv.innerHTML = `
+        ${item.name} - $${item.price} x${item.quantity} 
+        <button class="remove-btn" onclick="removeFromCart(${index})">Скасувати</button>
+    `;
+    return itemDiv;
+}
+
 function updateCart() {
     cartItemsContainer.innerHTML = '';
-    let total = 0;
-
-    cartItemsContainer.innerHTML = '';
+    
+    // Генерація елементів
     cart.forEach((item, index) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'cart-item';
-        itemDiv.innerHTML = `${item.name} - $${item.price} x${item.quantity} 
-    <button class="remove-btn" onclick="removeFromCart(${index})">Скасувати</button>`;
-        cartItemsContainer.appendChild(itemDiv);
+        cartItemsContainer.appendChild(createCartItemElement(item, index));
     });
 
-
+    // Розрахунок та вивід
+    const total = calculateCartTotal(cart);
     document.getElementById('cartTotal').innerText = total.toFixed(2);
-    document.querySelector('.cart-count').innerText = cart.length;
+    
+    // Оновлення лічильника
+    const countSpan = document.querySelector('.cart-count');
+    if (countSpan) countSpan.innerText = cart.length;
 }
 
 function removeFromCart(index) {
@@ -73,6 +86,15 @@ function getFormData(form) {
     };
 }
 
+
+    function processOrder(formData) {
+    const order = {
+        id: Date.now(),
+        date: new Date().toLocaleString(),
+        ...formData,
+        items: cart.map(item => `${item.name} x${item.quantity}`).join(', '),
+        total: calculateCartTotal(cart)
+    };
 
     orders.push(order);
     alert(`Дякуємо, ${formData.name}! Ваше замовлення підтверджене.`);
